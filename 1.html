@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="paper-full.js"></script>
+		<meta http-equiv="Refresh" content="1" />
+	</head>
+	<body>
+		<canvas id="myCanvas" width="500" height="500" resize></canvas>
+		
+		<script type="text/paperscript" canvas="myCanvas">
+
+		var path = new Path();
+		
+		function prtBorder(){
+			path.strokeColor = 'black';
+			path.add(new Point(0, 0)); 
+			path.add(new Point(500, 0)); 
+			path.add(new Point(500, 500));
+			path.add(new Point(0, 500));
+			path.closed = true;
+		}
+		prtBorder();
+
+		var r=10;
+		
+		var start = new Path.Circle(new Point(250, 250), r);
+		start.strokeColor = 'black';
+		start.fillColor = 'grey';
+		
+		function putCell(x,y){
+			var cell = new Path.Circle(new Point(x, y), r);
+			cell.strokeColor = 'black';
+		}
+		function putCellCatch(x,y){
+			var cell = new Path.Circle(new Point(x, y), r);
+			cell.strokeColor = 'black';
+			cell.fillColor = '#DADADA';
+		}
+		
+		var ang=new Point(r*Math.sqrt(2), r*Math.sqrt(2));
+		var center=new Point(250,250);
+		
+		var pos=new Point(ang.x+center.x, ang.y+center.y);
+		
+		var construction='ccac';
+		
+		for (var i = 0; i < construction.length; i++) {
+			if(construction[i]=='c'){
+				putCell(pos.x,pos.y);
+				pos+=ang;
+			}else if(construction[i]=='a'){
+				putCellCatch(pos.x,pos.y);
+				pos+=ang;
+			}
+		}
+
+		
+		</script>
+	</body>
+</html>
